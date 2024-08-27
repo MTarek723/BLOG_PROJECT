@@ -1,0 +1,13 @@
+<div class="searchs">Search Results</div>
+<div>
+    <ul class="article-ul">
+        <% data.forEach(element => { %>
+            <li>
+                <a href="/post/<%= element._id %>">
+                    <span><%= element.title %></span>
+                    <span class="article-list__date"><%= element.CreatedAt.toDateString() %></span>
+                </a>
+            </li>
+        <% }) %>
+    </ul>
+</div>
