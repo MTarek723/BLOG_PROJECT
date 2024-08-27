@@ -7,3 +7,15 @@ const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET
 
 const adminLayout = "../views/layouts/admin"
+
+//Sign In - Get Route
+router.get('/admin', async (req, res) => {
+    const locals = {
+        title: "admin Page"
+    }
+    try {
+        res.render('admin/index', { locals, layout: adminLayout })
+    } catch (error) {
+        console.log(error)
+    }
+})
