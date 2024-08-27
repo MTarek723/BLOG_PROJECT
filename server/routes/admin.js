@@ -132,3 +132,25 @@ router.put('/edit-post/:id', authMiddleware, async (req, res) => {
     }
 
   });
+
+//Delete post - Delete Route
+router.delete('/delete-post/:id', authMiddleware, async (req, res) => {
+
+    try {
+      await Post.deleteOne( { _id: req.params.id } );
+      res.redirect('/admin/dashboard');
+    } catch (error) {
+      console.log(error);
+    }
+
+  });
+
+//Logout - Get Route
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    //res.json({ message: 'Logout successful.'});
+    res.redirect('/');
+  });
+
+
+module.exports = router
