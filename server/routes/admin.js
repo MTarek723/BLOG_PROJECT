@@ -91,3 +91,44 @@ router.post('/add-post', authMiddleware, async (req, res) => {
       console.log(error);
     }
   });
+
+//Edit Post - Get Route
+router.get('/edit-post/:id', authMiddleware, async (req, res) => {
+    try {
+
+      const locals = {
+        title: "Edit Post",
+        description: "Free NodeJs User Management System",
+      };
+
+      const data = await Post.findOne({ _id: req.params.id });
+
+      res.render('admin/edit-post', {
+        locals,
+        data,
+        layout: adminLayout
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  });
+
+//Edit Post - Put Route
+router.put('/edit-post/:id', authMiddleware, async (req, res) => {
+    try {
+
+      await Post.findByIdAndUpdate(req.params.id, {
+        title: req.body.title,
+        body: req.body.body,
+        updatedAt: Date.now()
+      });
+
+      res.redirect(`/admin/dashboard`);
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  });
