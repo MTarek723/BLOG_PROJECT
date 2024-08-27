@@ -40,3 +40,14 @@ router.post('/admin', async (req, res) => {
         console.log(error)
     }
 })
+
+//Dashboard - Get Route
+router.get('/admin/dashboard',authMiddleware, async (req, res) => {
+    try {
+        const data = await Post.find()
+        res.render('admin/dashboard', {layout: adminLayout, data})
+    } catch (error) {
+
+    }
+
+})
