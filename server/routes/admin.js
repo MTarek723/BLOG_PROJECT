@@ -19,3 +19,24 @@ router.get('/admin', async (req, res) => {
         console.log(error)
     }
 })
+
+//Sign In - Post Route
+router.post('/admin', async (req, res) => {
+    try {
+        const {username, password} = req.body
+        const user = await User.findOne({ username })
+        if (!user) {
+            return res.status(401).json({ message: 'invalid' })
+        }
+        const validation = await bcrypt.compare(password, user.password)
+        if (!validation) {
+            return res.status(401).json({ message: 'invalid' })
+        }
+        const token = jwt.sign({userid: user._id}, jwtSecret)
+        res.cookie('token', token, { httpOnly: true})
+
+        res.redirect('admin/dashboard')
+    } catch (error) {
+        console.log(error)
+    }
+})
