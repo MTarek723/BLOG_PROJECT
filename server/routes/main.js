@@ -30,8 +30,7 @@ router.get('/post/:id', async (req, res)=> {
     }
     
 })
-
-//Search Result - Post Route
+//Search Bar - Post Route
 router.post('/search', async (req, res)=> {
     try {
         const searchTerm = req.body.searchTerm
@@ -48,7 +47,7 @@ router.post('/search', async (req, res)=> {
     }
     
 })
-
+ 
 //about - Get Route
 router.get('/about', (req, res) => {
     res.render('about')
